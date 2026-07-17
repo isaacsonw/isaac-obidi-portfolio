@@ -43,6 +43,7 @@ export default function Contact() {
             className="group inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-muted transition-colors hover:text-accent"
           >
             {profile.linkedinLabel}
+            <span className="sr-only"> (opens in a new tab)</span>
             <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
               ↗
             </span>

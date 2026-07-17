@@ -1,5 +1,6 @@
 import { navLinks, profile } from "@/lib/content";
 import ThemeToggle from "./ThemeToggle";
+import MobileNav from "./MobileNav";
 
 export default function Nav() {
   return (
@@ -34,6 +35,7 @@ export default function Nav() {
             Résumé
           </a>
           <ThemeToggle />
+          <MobileNav />
         </div>
       </nav>
     </header>

@@ -12,7 +12,8 @@
   --border-strong: #c8bda7;
   --foreground: #1b1813;
   --muted: #55503f;
-  --faint: #8a836f;
+  /* Darkened from #8a836f to meet WCAG AA (~4.9:1) for small text on paper. */
+  --faint: #6b6452;
   --accent: #b1442a;
   --accent-strong: #8f3420;
   --accent-contrast: #faf6ee;
@@ -26,7 +27,8 @@
   --border-strong: #423d34;
   --foreground: #ece5d7;
   --muted: #a79f8d;
-  --faint: #6f6857;
+  /* Lightened from #6f6857 to meet WCAG AA (~5.3:1) for small text on the dark bg. */
+  --faint: #928b78;
   --accent: #e07750;
   --accent-strong: #ec9272;
   --accent-contrast: #131210;

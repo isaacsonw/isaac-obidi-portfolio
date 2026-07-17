@@ -82,6 +82,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           <span className='border-b border-accent pb-0.5 transition-colors group-hover:text-accent'>
             {project.urlLabel}
           </span>
+          <span className='sr-only'> (opens in a new tab)</span>
           <span
             aria-hidden='true'
             className='text-accent transition-transform group-hover:translate-x-0.5'>
