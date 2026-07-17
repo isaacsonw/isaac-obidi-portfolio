@@ -17,13 +17,13 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           rel='noopener noreferrer'
           aria-label={`Visit ${project.name} — opens in a new tab`}
           className='group block overflow-hidden rounded-lg border border-border-strong bg-surface'>
-          <div className='relative aspect-[16/11] w-full overflow-hidden'>
+          <div className='relative aspect-16/11 w-full overflow-hidden'>
             <Image
               src={project.image}
               alt={project.imageAlt}
               fill
               sizes='(min-width: 768px) 58vw, 100vw'
-              className='object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]'
+              className='object-cover object-top grayscale brightness-90 transition duration-500 ease-out group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:brightness-100'
             />
           </div>
         </a>
