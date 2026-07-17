@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+/* Manual dark mode via a `.dark` class on <html>, defaulting to system preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light = warm paper. Deliberately not the cool gray/blue "default" palette. */
+:root {
+  --background: #f3eee4;
+  --surface: #faf6ee;
+  --surface-2: #ebe4d5;
+  --border: #ddd4c3;
+  --border-strong: #c8bda7;
+  --foreground: #1b1813;
+  --muted: #55503f;
+  --faint: #8a836f;
+  --accent: #b1442a;
+  --accent-strong: #8f3420;
+  --accent-contrast: #faf6ee;
+}
+
+.dark {
+  --background: #131210;
+  --surface: #1a1815;
+  --surface-2: #221f1a;
+  --border: #302c25;
+  --border-strong: #423d34;
+  --foreground: #ece5d7;
+  --muted: #a79f8d;
+  --faint: #6f6857;
+  --accent: #e07750;
+  --accent-strong: #ec9272;
+  --accent-contrast: #131210;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-contrast: var(--accent-contrast);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-fraunces);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Editorial display type. */
+.font-serif {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+/* A thin, warm hairline used to structure sections. */
+.hairline {
+  border-top: 1px solid var(--border-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Scroll-reveal: hidden until observed, then eases into place. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Infinite horizontal ticker (content is duplicated, so -50% loops seamlessly). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Force a light, ink-on-paper palette for printing (e.g. saving the résumé). */
+@media print {
+  :root,
+  .dark {
+    --background: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #ffffff;
+    --border: #cccccc;
+    --border-strong: #999999;
+    --foreground: #111111;
+    --muted: #333333;
+    --faint: #555555;
+    --accent: #7a2a18;
+    --accent-strong: #7a2a18;
+  }
+  body {
+    background: #ffffff;
+  }
+}
+
+/* Hide scrollbars on the horizontal-scroll track (kept keyboard/scroll accessible). */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep revealed content visible and stop the ticker cleanly. */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+  /* Collapse the scroll-jacked section into a plain horizontal swipe strip. */
+  .hscroll-section {
+    height: auto !important;
+  }
+  .hscroll-sticky {
+    position: static !important;
+    height: auto !important;
+  }
+  .hscroll-viewport {
+    overflow-x: auto !important;
+  }
+  .hscroll-track {
+    transform: none !important;
+  }
+}
