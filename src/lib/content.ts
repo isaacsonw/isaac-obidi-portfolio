@@ -228,8 +228,8 @@ export const principles: Principle[] = [
 export const aiWorkflow = {
   narrative:
     "This site was built in Cursor, and the session was recorded as the demo below. My edge isn't prompting — it's governance. I run agents against a fintech codebase under enforced rules, the same way I'd review a senior teammate's work.",
-  // Set to a real video URL (Vercel Blob / hosted / a /public path) before submitting.
-  videoSrc: "",
+  // A YouTube watch/share/embed URL renders as an embed; a hosted file (/public or CDN) renders as <video>.
+  videoSrc: "https://www.youtube.com/watch?v=jwOEmSA3VE0",
   videoPoster: "",
   points: [
     {

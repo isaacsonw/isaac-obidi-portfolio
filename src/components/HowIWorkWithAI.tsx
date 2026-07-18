@@ -2,8 +2,33 @@ import { aiWorkflow } from "@/lib/content";
 import Section from "./Section";
 import Reveal from "./Reveal";
 
+// Returns the youtube.com/embed URL for a watch, youtu.be, or embed link — else null.
+function getYouTubeEmbed(url: string): string | null {
+  const match = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/,
+  );
+  return match ? `https://www.youtube-nocookie.com/embed/${match[1]}` : null;
+}
+
 function VideoBlock() {
   if (aiWorkflow.videoSrc) {
+    const embed = getYouTubeEmbed(aiWorkflow.videoSrc);
+
+    if (embed) {
+      return (
+        <div className="aspect-video w-full overflow-hidden rounded-lg border border-border-strong bg-black">
+          <iframe
+            src={embed}
+            title="How I work with AI — building this portfolio in Cursor"
+            className="h-full w-full"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="overflow-hidden rounded-lg border border-border-strong bg-black">
         <video
